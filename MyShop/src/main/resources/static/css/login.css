@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900;1000&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Nunito, Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 14px;
+    color: #737677;
+    min-height: 100vh;
+    background: #212534;
+    background: #eeeeee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+.input-group {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+}
+
+.icon {
+    display: flex;
+    color: #2c363a;
+    background-color: #f1f3f4;
+    padding: 12px 13px;
+    font-size: 20px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border: 1px solid #ced4da;
+    margin-right: -1px;
+}
+
+.input_auth {
+    width: 300px;
+    height: 46px;
+    padding: 8px 12px;
+    color: #2c363a;
+    font-size: 20px;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-bottom: 10px;
+    outline: none;
+}
+
+.input_auth:hover, .input_auth:focus {
+    border: 1px solid #5fcded;
+}
+
+.input_reg {
+    width: 350px;
+    height: 45px;
+    padding: 8px 12px;
+    color: #2c363a;
+    font-size: 18px;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    outline: none;
+}
+
+input, label {
+    text-align: left;
+    display: block;
+}
+
+.err_auth {
+    width: 300px;
+    color: #ff0920;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.button_auth {
+    width: 100%;
+    font-size: 20px;
+    color: #fff;
+    background: #37beff;
+    border: none;
+    padding: 11px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.button_auth:hover {
+    background: #1eb6ff;
+}
+
+.reg-link {
+    color: #00acff;
+    text-decoration: none;
+}
+
+.reg-link:hover {
+    color: #008acc;
+}

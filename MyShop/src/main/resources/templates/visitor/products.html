@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Shop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 logo">
+                <a href="/">
+                    <img th:src="@{/img/logo.png}">
+                    <span>My Shop</span>
+                </a>
+            </div>
+            <div class="col-sm-5">
+                <div class="search_bg">
+                    <form method="POST" th:action="@{/products/search}">
+                        <input type="text" name="search" th:value="*{value_search}" class="search" placeholder="Найти">
+                        <button type="submit" class="icon_search"><i class="bi bi-search "></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-sm-4 panel-link">
+                <a href="/auth/login" class="i-link">
+                    <i class="bi bi-box-arrow-in-right"></i>Войти
+                </a>
+                <a href="/auth/registration" class="reg">Регистрация</a>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <form method="POST" th:action="@{/products/sorting/}" id="sorting-filtering">
+    <div class="panel-sorting-filtering">
+        <div>
+            <label>Категория:</label>
+            <select class="select-category" name="id_category" onchange="document.getElementById('sorting-filtering').submit()">
+                <option value="0" th:selected="${checkSelected.isSelected(0, selecting_category)}">Все категории</option>
+                <div th:each="element : ${list_category}">
+                    <option th:value="${element.getId()}" th:text="${element.getName()}" th:selected="${checkSelected.isSelected(element.getId(), selecting_category)}"></option>
+                </div>
+            </select>
+        </div>
+        <div class="inline-filtering">
+            <div>
+                <label>Цена от:</label>
+                <input class="input-filtering startN" type="number" th:value="${minPrice}" name="min">
+            </div>
+            <div>
+                <label>до:</label>
+                <input class="input-filtering endN" type="number" th:value="${maxPrice}" name="max">
+            </div>
+            <div class="go-filtering" onclick="document.getElementById('sorting-filtering').submit()">
+                <i class="bi bi-play-fill"></i>
+            </div>
+        </div>
+        <div>
+            <label>Сортировка:</label>
+            <select class="select-category" name="id_sort" onchange="document.getElementById('sorting-filtering').submit()">
+                <option value="0" th:selected="${checkSelected.isSelected(0, selecting_sorting)}">Без сортировки</option>
+                <option value="1" th:selected="${checkSelected.isSelected(1, selecting_sorting)}">По возрастанию цены</option>
+                <option value="2" th:selected="${checkSelected.isSelected(2, selecting_sorting)}">По убыванию цены</option>
+            </select>
+        </div>
+    </div>
+    </form>
+    <div class="row">
+        <div class="product">
+            <div th:each="product : ${products}" class="card">
+                <a th:href="@{/product/info/{id}(id=${product.getId()})}" class="card_link">
+                    <div class="card_inner">
+                        <img th:src="'/img/' + ${product.imageList[0].getFileName()}" width="230px">
+                        <p class="title_card" th:text="${product.getTitle()}"></p>
+                        <span th:text="${product.getPrice()} + ' ₽'" class="price"></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

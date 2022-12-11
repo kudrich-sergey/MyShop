@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет администратора</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet">
+</head>
+<body>
+<header th:insert="admin/header :: header"></header>
+<div class="container">
+    <div class="row">
+        <div class="h_add">
+            Добавление товара
+        </div>
+    </div>
+    <div class="row">
+        <div class="main col-12">
+            <form th:method="POST" th:action="@{/admin/product/add}" th:object="${product}" enctype="multipart/form-data">
+                <div class="inline_add">
+                    <div class="form_item">
+                        <label class="form_item-label">Категория:</label>
+                        <div class="form_item-field">
+                            <select name="category" th:field="*{category}" class="select-field">
+                                <div th:each="element : ${category}">
+                                    <option th:text="${element.getName()}" th:value="${element.getId()}"></option>
+                                </div>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form_item">
+                        <label class="form_item-label">Название:</label>
+                        <div class="form_item-field">
+                            <input type="text" th:field="*{title}" class="textfield">
+                        </div>
+                        <div class="err" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+                    </div>
+                    <div class="form_item">
+                        <label class="form_item-label">Цена:</label>
+                        <div class="form_item-field">
+                            <input type="number" th:field="*{price}" th:min="1" class="textfield">
+                        </div>
+                        <div class="err" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+                    </div>
+                </div>
+                <div class="form_item">
+                    <label class="form_item-label">Описание:</label>
+                    <div class="form_item-field">
+                        <textarea th:field="*{description}" class="textfield" rows="5"></textarea>
+                    </div>
+                    <div class="err" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+                </div>
+                <p class="text_infoPhoto">Вы можете добавить до 5 фотографий. Первая фотография обязательная и в карточке товара главная!</p>
+                <div class="inline_inputFiles">
+                    <div class="input_group">
+                        <label id="l-file-1">
+                            <i class="bi bi-camera icon_file" id="icon_file1"></i>
+                            <span class="title_photo" id="text_file1">Добавить фото</span>
+                            <input type="file" id="file_1" name="file_one">
+                        </label>
+                    </div>
+                    <div class="input_group">
+                        <label id="l-file-2">
+                            <i class="bi bi-camera icon_file" id="icon_file2"></i>
+                            <span class="title_photo" id="text_file2">Добавить фото</span>
+                            <input type="file" id="file_2" name="file_two">
+                        </label>
+                    </div>
+                    <div class="input_group">
+                        <label id="l-file-3">
+                            <i class="bi bi-camera icon_file" id="icon_file3"></i>
+                            <span class="title_photo" id="text_file3">Добавить фото</span>
+                            <input type="file" id="file_3" name="file_three">
+                        </label>
+                    </div>
+                    <div class="input_group">
+                        <label id="l-file-4">
+                            <i class="bi bi-camera icon_file" id="icon_file4"></i>
+                            <span class="title_photo" id="text_file4">Добавить фото</span>
+                            <input type="file" id="file_4" name="file_four">
+                        </label>
+                    </div>
+                    <div class="input_group">
+                        <label id="l-file-5">
+                            <i class="bi bi-camera icon_file" id="icon_file5"></i>
+                            <span class="title_photo" id="text_file5">Добавить фото</span>
+                            <input type="file" id="file_5" name="file_five">
+                        </label>
+                    </div>
+                </div>
+                <div class="form_actions">
+                    <button type="submit" class="btn">Добавить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/upload.js}"></script>
+</body>
+</html>

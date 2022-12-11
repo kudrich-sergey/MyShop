@@ -1,0 +1,26 @@
+    <div th:fragment="header" class="container">
+        <div class="row">
+            <div class="col-sm-3 logo">
+                <a href="/admin/users">
+                    <img th:src="@{/img/logo.png}">
+                    <span>My Shop</span>
+                </a>
+            </div>
+            <div class="col-sm-5">
+                <div class="menu">
+                    <a href="/admin/users" class="menu_link">Пользователи</a>
+                    <a href="/admin/products" class="menu_link">Товары</a>
+                    <a href="/admin/orders" class="menu_link">Заказы</a>
+                </div>
+            </div>
+            <div class="col-sm-4 auth_info">
+                <div>
+                    <span class="auth_name" th:text="${fio}"></span>
+                    <span class="auth_role" th:text="${role}"></span>
+                </div>
+                <form th:method="POST" th:action="@{/logout}">
+                    <button type="submit" class="logout">Выйти<i class="bi bi-box-arrow-right"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>

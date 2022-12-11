@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>My Shop</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet">
+</head>
+<body>
+<header>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3 logo">
+        <a href="/">
+          <img th:src="@{/img/logo.png}">
+          <span>My Shop</span>
+        </a>
+      </div>
+      <div class="col-sm-5">
+        <div class="search_bg">
+          <form method="post" th:action="@{/search}">
+            <input name="search" class="search" type="text" placeholder="Найти">
+            <button type="submit" class="icon_search"><i class="bi bi-search "></i></button>
+          </form>
+        </div>
+      </div>
+      <div class="col-sm-4 panel-link">
+        <a href="/auth/login" class="i-link">
+          <i class="bi bi-box-arrow-in-right"></i>Войти
+        </a>
+        <a href="/auth/registration" class="reg">Регистрация</a>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="container">
+  <div class="row">
+    <h3>
+      <a class="category_link" th:href="@{/}">Каталог </a>
+      <i class="bi bi-arrow-right-short"></i>
+      <a class="category_link" th:href="@{/products/category/{id}(id=${product.getCategory().getId()})}" th:text="${product.getCategory().getName()}"> Ноутбуки</a>
+    </h3>
+    <div class="product_title" th:text="${product.getTitle()}"></div>
+    <div class="inline_infoProduct">
+      <div>
+        <div th:if="${product.getImageList().size()} > 0" class="product_preview-mini active_preview-mini">
+          <img th:src="'/img/' + ${product.getImageList().get(0).getFileName()}" width="70px">
+        </div>
+        <div th:if="${product.getImageList().size()} > 1" class="product_preview-mini">
+          <img th:src="'/img/' + ${product.getImageList().get(1).getFileName()}" width="70px">
+        </div>
+        <div th:if="${product.getImageList().size()} > 2" class="product_preview-mini">
+          <img th:src="'/img/' + ${product.getImageList().get(2).getFileName()}" width="70px">
+        </div>
+        <div th:if="${product.getImageList().size()} > 3" class="product_preview-mini">
+          <img th:src="'/img/' + ${product.getImageList().get(3).getFileName()}" width="70px">
+        </div>
+        <div th:if="${product.getImageList().size()} > 4" class="product_preview-mini">
+          <img th:src="'/img/' + ${product.getImageList().get(4).getFileName()}" width="70px">
+        </div>
+      </div>
+      <div class="product_preview">
+        <img th:src="'/img/' + ${product.getImageList().get(0).getFileName()}" width="460px" id="change_image">
+      </div>
+      <div>
+        <div class="product_price" th:text="${product.getPrice()} + ' ₽'"></div>
+        <div class="product_description" th:text="${product.getDescription()}"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" th:src="@{/js/product.js}"></script>
+</body>
+</html>

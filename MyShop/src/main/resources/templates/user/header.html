@@ -1,0 +1,33 @@
+<div th:fragment="header" class="container">
+  <div class="row">
+    <div class="col-sm-2 logo">
+      <a href="/user/products">
+        <img th:src="@{/img/logo.png}">
+        <span>My Shop</span>
+      </a>
+    </div>
+    <div class="col-sm-4">
+      <div class="search_bg">
+        <form method="post" th:action="@{/user/products/search}">
+          <input name="search" class="search" type="text" placeholder="Найти">
+          <button type="submit" class="icon_search"><i class="bi bi-search "></i></button>
+        </form>
+      </div>
+    </div>
+    <div class="col-sm-6 panel-link">
+      <a href="/user/orders" class="i-link">
+        <i class="bi bi-card-checklist"></i>Заказы
+      </a>
+      <a href="/user/cart" class="i-link">
+        <i class="bi bi-basket"></i>Корзина
+      </a>
+      <div>
+        <span class="auth_name" th:text="${fio}"></span>
+        <span class="auth_role" th:text="${role}"></span>
+      </div>
+      <form th:method="POST" th:action="@{/logout}">
+        <button type="submit" class="logout">Выйти<i class="bi bi-box-arrow-right"></i></button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Авторизация</title>
+    <link th:href="@{/css/login.css}" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <form th:method="POST" th:action="@{/process_login}">
+        <div>
+            <h1>Авторизация</h1>
+            <div class="input-group">
+                <span>
+                    <i class="bi bi-person-fill icon"></i>
+                </span>
+                <input name="username" class="input_auth" type="text" placeholder="Логин">
+            </div>
+            <div class="input-group">
+                <span>
+                    <i class="bi bi-lock-fill icon"></i>
+                </span>
+                <input name="password" class="input_auth" type="password" placeholder="Пароль">
+            </div>
+            <div th:if="${param.error}" class="err_auth">
+                Неправильный логин или пароль
+            </div>
+            <div>
+                <button type="submit" class="button_auth">Войти</button>
+            </div>
+            <div>Нет аккаунта? &nbsp;•&nbsp; <a href="/auth/registration" class="reg-link">Зарегистрироваться</a>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

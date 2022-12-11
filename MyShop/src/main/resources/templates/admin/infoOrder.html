@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Личный кабинет администратора</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet">
+</head>
+<body>
+<header th:insert="admin/header :: header"></header>
+<div class="container">
+  <div class="row">
+    <div class="h_add">
+      Информация о заказе
+    </div>
+  </div>
+  <div class="row">
+    <div class="main col-12">
+
+      <div class="inline_infoOrder_col-4">
+        <div class="form_item">
+          <label class="form_item-label">Номер заказа:</label>
+          <div class="form_item-field">
+            <input type="text" name="number_order" class="textfield" th:value="${order.getNumber()}" disabled>
+          </div>
+        </div>
+        <div class="form_item">
+          <label class="form_item-label">Дата заказа:</label>
+          <div class="form_item-field">
+            <input type="text" name="date_order" class="textfield" th:value="${#temporals.format(order.getDateOrder(), 'dd-MM-yyyy')}" disabled>
+          </div>
+        </div>
+        <div class="form_item">
+          <label class="form_item-label">Сумма заказа:</label>
+          <div class="form_item-field">
+            <input type="text" name="sum_order" class="textfield" th:value="${order.getPrice()} + ' ₽'" disabled>
+          </div>
+        </div>
+        <div class="form_item">
+          <form method="POST" th:action="@{/admin/order/change/status/{id}(id=${order.getId()})}" id="changeStatus">
+            <label class="form_item-label" id="status">Стутс заказа:</label>
+            <div class="form_item-field">
+              <select class="select-field" th:name="id_status" onchange="document.getElementById('changeStatus').submit()">
+                <option th:each="status : ${statuses}" th:value="${status.getKey()}" th:text="${status.getValue()}" th:selected="${order.isSelected(status.getValue())}"></option>
+              </select>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="inline_infoOrder_col-3">
+        <div class="form_item">
+          <label class="form_item-label">Категория:</label>
+          <div class="form_item-field">
+            <div class="form_item-field">
+              <input type="text" name="name_product_order" class="textfield" th:value="${order.getProduct().getCategory().getName()}" disabled>
+            </div>
+          </div>
+        </div>
+        <div class="form_item">
+          <label class="form_item-label">Название товара:</label>
+          <div class="form_item-field">
+            <input type="text" name="name_product_order" class="textfield" th:value="${order.getProduct().getTitle()}" disabled>
+          </div>
+        </div>
+        <div class="form_item">
+          <label class="form_item-label">Количество товара:</label>
+          <div class="form_item-field">
+            <input type="text" name="count_product_order" class="textfield" th:value="${order.getCount()}" disabled>
+          </div>
+        </div>
+      </div>
+      <div class="inline_infoOrder_col-2 indent">
+        <div class="form_item">
+          <label class="form_item-label">Получатель:</label>
+          <div class="form_item-field">
+            <input type="text" name="user_order" class="textfield" th:value="${order.getUser().getLastname()} + ' ' +
+            ${order.getUser().getFirstname()} + ' ' + ${order.getUser().getPatronymic()}" disabled>
+          </div>
+        </div>
+        <div class="form_item">
+          <label class="form_item-label">Адрес доставки:</label>
+          <div class="form_item-field">
+            <input type="text" name="user_order" class="textfield" th:value="${order.getAddress()}" disabled>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

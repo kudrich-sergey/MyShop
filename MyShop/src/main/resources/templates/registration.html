@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Регистрация</title>
+  <link th:href="@{/css/login.css}" type="text/css" rel="stylesheet">
+</head>
+<body>
+<form th:method="POST" th:action="@{/auth/registration}" th:object="${user}">
+  <div>
+    <h1>Регистрация</h1>
+    <div>
+      <label for="lastname">Фамилия:</label>
+      <input name="lastname" class="input_reg" th:field="*{lastname}" type="text" placeholder="Введите фамилию" id="lastname">
+    </div>
+    <div class="err_auth" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></div>
+    <div>
+      <label for="firstname">Имя:</label>
+      <input name="firstname" class="input_reg" th:field="*{firstname}" type="text" placeholder="Введите имя" id="firstname">
+    </div>
+    <div class="err_auth" th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></div>
+    <div>
+      <label for="patronymic">Отчество:</label>
+      <input name="patronymic" class="input_reg" th:field="*{patronymic}" type="text" placeholder="Введите отчество" id="patronymic">
+    </div>
+    <div class="err_auth" th:if="${#fields.hasErrors('patronymic')}" th:errors="*{patronymic}"></div>
+    <div>
+      <label for="login">Логин:</label>
+      <input name="username" class="input_reg" th:field="*{login}" type="text" placeholder="Введите логин" id="login">
+    </div>
+    <div class="err_auth" th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></div>
+    <div>
+      <label for="password">Пароль:</label>
+      <input name="password" class="input_reg" th:field="*{password}" type="password" placeholder="Введите пароль" id="password">
+    </div>
+    <div class="err_auth" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+    <div>
+      <button type="submit" class="button_auth">Зарегистрироваться</button>
+    </div>
+    <div>Уже есть аккаунт? &nbsp;•&nbsp; <a href="/auth/login" class="reg-link">Авторизироваться</a>
+    </div>
+  </div>
+</form>
+</body>
+</html>

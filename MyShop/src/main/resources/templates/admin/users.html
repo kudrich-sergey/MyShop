@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет администратора</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <header th:insert="admin/header :: header"></header>
+    <div class="container">
+        <h3>Список пользователей:</h3>
+        <div class="row list">
+            <div class="inline_listUsers headList">
+                <div>Фамилия</div>
+                <div>Имя</div>
+                <div>Отчество</div>
+                <div>Логин</div>
+                <div>Дата регистрации</div>
+                <div>Роль пользователя</div>
+                <div></div>
+            </div>
+            <div th:each="user : ${users}" class="inline_listUsers">
+                <div th:text="${user.getLastname()}"></div>
+                <div th:text="${user.getFirstname()}"></div>
+                <div th:text="${user.getPatronymic()}"></div>
+                <div th:text="${user.getLogin()}"></div>
+                <div th:text="${#temporals.format(user.getDateTimeOfRegistration(), 'dd-MM-yyyy')}"></div>
+                <div th:text="${user.getTextRole()}"></div>
+                <div>
+                    <a th:if="${user.getRole().equals('ROLE_ADMIN')}" th:href="@{/admin/user/role/down/{id}(id=${user.getId()})}" class="action"><i class="bi bi-person-down"></i></a>
+                    <a th:if="${user.getRole().equals('ROLE_USER')}" th:href="@{/admin/user/role/up/{id}(id=${user.getId()})}" class="action"><i class="bi bi-person-up"></i></a>
+                    <a th:href="@{/admin/user/delete/{id}(id=${user.getId()})}" class="action"><i class="bi bi-x-circle"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
